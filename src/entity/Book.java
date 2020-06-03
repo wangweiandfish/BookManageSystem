@@ -13,10 +13,23 @@ public class Book implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 private String isbn;
-private String bookId;//在图书馆中的内部编号
+private String bookId;//在图书馆中的内部编号(唯一性)
 //private boolean isCanrent;
 private Bookstate state;//图书状态
 private BookInfo bookinfo;
+/***
+ *这里验证传入的obj对象是不是和本对象是同一本书
+ *判断BookId是否相同
+ */
+@Override
+	public boolean equals(Object obj) {
+		if(obj==null) return false;
+		if(!(obj instanceof Book)) return false;
+		Book book=(Book)obj;
+		
+		return bookId.equals(book.getBookId());
+	}
+
 public String getIsbn() {
 	return isbn;
 }
