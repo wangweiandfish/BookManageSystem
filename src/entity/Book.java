@@ -8,10 +8,11 @@ import java.io.Serializable;
  *创建时间:2020年6月2日 下午5:28:42
  */
 public class Book implements Serializable{
+
 /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7910552002087648505L;
 private String isbn;
 private String bookId;//在图书馆中的内部编号(唯一性)
 //private boolean isCanrent;

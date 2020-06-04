@@ -12,11 +12,15 @@ import java.util.List;
  *创建时间:2020年6月2日 下午5:02:38
  *
  */
-public class BookInfo implements Serializable{//序列化接口
+public class BookInfo implements Serializable{
+	
+	
+//序列化接口
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3749803843817332561L;
 	private String isbn;    //出版号
 	private String bookName; //图书名称
 	private String type; //图书类型
