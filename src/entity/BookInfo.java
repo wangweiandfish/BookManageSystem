@@ -43,6 +43,7 @@ public class BookInfo implements Serializable{
 		if(booklist.contains(book)) return;//集合直接调用了类的equals方法
 		book.setBookinfo(this);
 		booklist.add(book);
+		inStoreCount++;
 	}
 	
 	//待会重写equals,toString方法

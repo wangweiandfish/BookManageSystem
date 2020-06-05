@@ -1,7 +1,5 @@
 package Biz.Impl;
-
 import java.util.Map;
-
 import Biz.BookInfoBiz;
 import Util.FileUtil;
 import entity.BookInfo;
@@ -17,10 +15,6 @@ public class BookInfoBizImpl_ver1 implements BookInfoBiz{
 	 * 
 	 */
 	private static final long serialVersionUID = -3900928059701481047L;
-
-	
-	
-
 	@Override
 	public boolean add(BookInfo bookinfo) {
 		//1.得到所有的BookInfoMap
@@ -81,14 +75,34 @@ public class BookInfoBizImpl_ver1 implements BookInfoBiz{
 
 	@Override
 	public boolean outStore(String isbn, int outCount) {
-		// TODO Auto-generated method stub
-		return false;
+		//获得文件中所有的图书信息
+		Map<String,BookInfo> bookinfoMap=findAll();
+		if(bookinfoMap==null) return false;
+		BookInfo bookinfo=bookInfoFindByIsbn(isbn);//得到图书信息
+		if(bookinfo==null) return false;//没有找到该书籍
+		if(outCount>bookinfo.getInStoreCount()) {//出库数量不能大于存储量
+			return false;
+		}
+		//实现出库操作
+		bookinfo.setInStoreCount(bookinfo.getInStoreCount()-outCount);
+		//将更改过的信息放回集合
+		bookinfoMap.put(isbn, bookinfo);
+		//文件更新
+		FileUtil.SavaBookInfoMap(bookinfoMap);
+		return true;
 	}
 
 	@Override
 	public boolean inStore(String isbn, int inCount) {
-		// TODO Auto-generated method stub
-		return false;
+		//获得文件中所有的图书信息
+				Map<String,BookInfo> bookinfoMap=findAll();
+				if(bookinfoMap==null) return false;
+				BookInfo bookinfo=bookInfoFindByIsbn(isbn);//得到图书信息
+				if(bookinfo==null) return false;//没有找到该书籍
+				bookinfo.setInStoreCount(bookinfo.getInStoreCount()+inCount);
+				bookinfoMap.put(isbn, bookinfo);
+				FileUtil.SavaBookInfoMap(bookinfoMap);
+		return true;
 	}
 
 	@Override
